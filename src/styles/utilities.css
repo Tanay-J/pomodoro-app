@@ -52,6 +52,12 @@
 .text-gray {
   color: var(--gray);
 }
+.text-danger {
+  color: var(--danger);
+}
+.text-success {
+  color: var(--success);
+}
 /* other */
 .pointer {
   cursor: pointer;
