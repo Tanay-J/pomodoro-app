@@ -16,11 +16,13 @@ const Modal = () => {
         }
   );
 
+  const [errorMsg, setErrorMsg] = useState("");
+
   const saveTask = (e) => {
     e.preventDefault();
-    if (formData.title && formData.time) {
-      taskManagerDispatch({ type: "ADD_TASK", payload: formData });
-    }
+    formData.title && formData.time
+      ? taskManagerDispatch({ type: "ADD_TASK", payload: formData })
+      : setErrorMsg("Task title and duration are required");
   };
   return (
     <div className={`${styles.modal_wrapper}`}>
@@ -100,7 +102,7 @@ const Modal = () => {
             <small>60 min</small>
           </label>
         </div>
-
+        {errorMsg && <small className="text-danger">{errorMsg}</small>}
         <button className="btn btn-primary my-xs" onClick={saveTask}>
           ADD TASK
         </button>
