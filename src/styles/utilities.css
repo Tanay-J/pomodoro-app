@@ -1,0 +1,49 @@
+/* grid and flex*/
+.grid {
+  display: grid;
+}
+
+.col-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.col-20-80 {
+  grid-template-columns: 20% 80%;
+}
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.gap-1 {
+  gap: 1rem;
+}
+
+.align-items-center {
+  align-items: center;
+}
+.justify-items-center {
+  justify-items: center;
+}
+
+/* text */
+.text-primary {
+  color: var(--primary-light);
+}
+.text-accent {
+  color: var(--accent);
+}
+.text-white {
+  color: var(--text-white);
+}
+.text-gray-light {
+  color: var(--gray-light);
+}
+.text-gray {
+  color: var(--gray);
+}
+/* other */
+.pointer {
+  cursor: pointer;
+}
