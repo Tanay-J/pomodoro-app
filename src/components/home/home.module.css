@@ -1,1 +1,4 @@
-/* css module */
+.tasks_container {
+  min-height: 20rem;
+  background-color: var(--primary-shade);
+}
