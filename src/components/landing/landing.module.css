@@ -1,1 +1,7 @@
-/* css module */
+.banner_img {
+  max-width: 20rem;
+  height: auto;
+}
+.btn {
+  padding: 0.5rem 2.5rem;
+}
