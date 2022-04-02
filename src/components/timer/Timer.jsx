@@ -20,19 +20,23 @@ const Timer = ({ time }) => {
   const renderTime = ({ remainingTime }) => {
     const minutes = prefixZero(Math.floor((remainingTime % 3600) / 60));
     const seconds = prefixZero(remainingTime % 60);
-    return (
-      <div className="text-center">
-        <p className={`${styles.timer}`}>
-          {minutes}m : {seconds}s
-        </p>
+    {
+      return remainingTime == 0 ? (
+        <p className="text-primary text-s font-bold">Time Up!</p>
+      ) : (
+        <div className="text-center">
+          <p className={`${styles.timer}`}>
+            {minutes}m : {seconds}s
+          </p>
 
-        {isPlaying ? (
-          <p className="text-gray my-s">out of {time / 60} min</p>
-        ) : (
-          <p className="text-primary font-bold my-s">PAUSED</p>
-        )}
-      </div>
-    );
+          {isPlaying ? (
+            <p className="text-gray my-s">out of {time / 60} min</p>
+          ) : (
+            <p className="text-primary font-bold my-s">PAUSED</p>
+          )}
+        </div>
+      );
+    }
   };
 
   return (
