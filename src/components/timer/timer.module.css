@@ -1,1 +1,15 @@
-/* css module */
+.timer_container {
+  width: fit-content;
+}
+.timer {
+  font-size: 2rem;
+  font-weight: bolder;
+  color: var(--gray);
+}
+.text_container{
+    max-width: 30rem;
+    margin-left: 3rem;
+}
+.link{
+    text-decoration: none;
+}
