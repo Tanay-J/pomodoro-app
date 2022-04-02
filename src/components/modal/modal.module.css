@@ -1,0 +1,25 @@
+.modal_wrapper {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  inset: 0;
+}
+.modal_container {
+  background-color: var(--primary-dark);
+  color: var(--text-white);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+}
+.input {
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  outline-color: var(--primary-light);
+}
+.textarea {
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  resize: none;
+  font-family: "Lato";
+}

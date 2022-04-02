@@ -26,6 +26,9 @@
 .justify-items-center {
   justify-items: center;
 }
+.justify-con-space-bet {
+  justify-content: space-between;
+}
 
 /* text */
 .text-primary {
@@ -37,11 +40,23 @@
 .text-white {
   color: var(--text-white);
 }
+.text-black {
+  color: var(--text-black);
+}
+.text-dark {
+  color: var(--text-dark);
+}
 .text-gray-light {
   color: var(--gray-light);
 }
 .text-gray {
   color: var(--gray);
+}
+.text-danger {
+  color: var(--danger);
+}
+.text-success {
+  color: var(--success);
 }
 /* other */
 .pointer {
