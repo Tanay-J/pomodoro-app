@@ -12,12 +12,18 @@ const HomePage = () => {
       <Navbar />
       <div className="m-xl">
         <h3 className="h3 text-dark">Welcome, Tanay</h3>
-        {taskManagerState.taskList.length ? (
+        {taskManagerState.taskList.length == 0 && (
+          <p className="text-s text-gray">Let's start!</p>
+        )}
+        {taskManagerState.taskList.length == 1 && (
+          <p className="text-s text-gray">
+            You have {taskManagerState.taskList.length} task pending. Let's go!
+          </p>
+        )}
+        {taskManagerState.taskList.length > 1 && (
           <p className="text-s text-gray">
             You have {taskManagerState.taskList.length} tasks pending. Let's go!
           </p>
-        ) : (
-          <p className="text-s text-gray">Let's start!</p>
         )}
       </div>
 
