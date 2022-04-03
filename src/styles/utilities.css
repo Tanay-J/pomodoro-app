@@ -26,6 +26,9 @@
 .justify-items-center {
   justify-items: center;
 }
+.justify-con-center {
+  justify-content: center;
+}
 .justify-con-space-bet {
   justify-content: space-between;
 }

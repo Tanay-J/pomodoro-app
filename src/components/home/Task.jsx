@@ -8,7 +8,7 @@ const Task = ({ task }) => {
     <div className="flex justify-con-space-bet" key={task._id}>
       <Link
         to="/timer"
-        state={{ time: task.time }}
+        state={{ task: task }}
         className="link text-dark text-s"
       >
         <p onClick={() => taskManagerDispatch({ type: "SHOW_TIMER" })}>
