@@ -13,6 +13,7 @@ const Modal = () => {
           title: "",
           desc: "",
           time: "25",
+          breakTime: 5,
         }
   );
 
@@ -100,6 +101,41 @@ const Modal = () => {
               checked={formData.time == 60}
             ></input>
             <small>60 min</small>
+          </label>
+        </div>
+        <div className="text-center">
+          <p className="text-primary">Break</p>
+          <label
+            onClick={(e) =>
+              setFormData((prevData) => ({
+                ...prevData,
+                breakTime: e.target.value,
+              }))
+            }
+          >
+            <input
+              type="radio"
+              name="breakTime"
+              value="5"
+              checked={formData.breakTime == 5}
+            ></input>
+            <small>Short</small>
+          </label>
+          <label
+            onClick={(e) =>
+              setFormData((prevData) => ({
+                ...prevData,
+                breakTime: e.target.value,
+              }))
+            }
+          >
+            <input
+              type="radio"
+              name="breakTime"
+              value="15"
+              checked={formData.breakTime == 15}
+            ></input>
+            <small>Long</small>
           </label>
         </div>
         {errorMsg && <small className="text-danger">{errorMsg}</small>}
