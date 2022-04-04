@@ -5,8 +5,9 @@ const TaskManagerContext = createContext();
 const useTaskManager = () => useContext(TaskManagerContext);
 
 const TaskManagerProvider = ({ children }) => {
+  const taskListFromLocal = JSON.parse(localStorage.getItem("taskList"));
   const initialState = {
-    taskList: JSON.parse(localStorage.getItem("taskList")) || [],
+    taskList: taskListFromLocal || [],
     showModal: false,
     showTimer: false,
     taskToEdit: {},

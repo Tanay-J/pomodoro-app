@@ -4,9 +4,9 @@ import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(
-    JSON.parse(localStorage.getItem("darkMode")) || false
-  );
+  const themeFromLocal = JSON.parse(localStorage.getItem("darkMode"));
+
+  const [darkMode, setDarkMode] = useState(themeFromLocal || false);
 
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
