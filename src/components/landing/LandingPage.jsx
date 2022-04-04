@@ -1,6 +1,7 @@
 import styles from "./landing.module.css";
 import landing from "../../assets/landing.svg";
 import { Link } from "react-router-dom";
+import { funFacts } from "../../utils/funFacts";
 
 const LandingPage = () => {
   return (
@@ -26,6 +27,12 @@ const LandingPage = () => {
         <div>
           <img src={landing} className={`${styles.banner_img}`}></img>
         </div>
+      </div>
+      <div className="text-center">
+        <small className="text-primary">Do you know? </small>
+        <small className={`${styles.info_text} text-gray`}>
+          {funFacts[Math.floor(Math.random() * 3)]}
+        </small>
       </div>
     </>
   );
