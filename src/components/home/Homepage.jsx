@@ -2,14 +2,12 @@ import { TaskList } from "../home/TaskList";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { Modal } from "../modal/Modal";
 import { useTaskManager } from "../../contexts/task-manager-context";
-import { Navbar } from ".././navigation/";
 import styles from "./home.module.css";
 
 const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
   return (
     <>
-      <Navbar />
       <div className="m-xl">
         <h3 className="h3 text-dark">Welcome, Tanay</h3>
         {taskManagerState.taskList.length == 0 && (

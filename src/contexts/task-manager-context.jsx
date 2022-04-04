@@ -1,12 +1,13 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { taskManagerReducer } from "../utils/reducers/taskManagerReducer";
 
 const TaskManagerContext = createContext();
 const useTaskManager = () => useContext(TaskManagerContext);
 
 const TaskManagerProvider = ({ children }) => {
+  const taskListFromLocal = JSON.parse(localStorage.getItem("taskList"));
   const initialState = {
-    taskList: [],
+    taskList: taskListFromLocal || [],
     showModal: false,
     showTimer: false,
     taskToEdit: {},
@@ -16,6 +17,10 @@ const TaskManagerProvider = ({ children }) => {
     taskManagerReducer,
     initialState
   );
+
+  useEffect(() => {
+    localStorage.setItem("taskList", JSON.stringify(taskManagerState.taskList));
+  }, [taskManagerState.taskList]);
   return (
     <TaskManagerContext.Provider
       value={{ taskManagerState, taskManagerDispatch }}

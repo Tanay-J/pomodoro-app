@@ -65,3 +65,7 @@
 .pointer {
   cursor: pointer;
 }
+.link:hover {
+  border: none;
+}
+

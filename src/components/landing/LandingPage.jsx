@@ -1,16 +1,15 @@
 import styles from "./landing.module.css";
 import landing from "../../assets/landing.svg";
-import { Navbar } from "../navigation";
 import { Link } from "react-router-dom";
+import { funFacts } from "../../utils/funFacts";
 
 const LandingPage = () => {
   return (
     <>
-      <Navbar />
       <div className={`grid col-2 justify-items-center my-xl py-xl`}>
         <div>
           <div className="my-s">
-            <h3 className="h3 my-s">
+            <h3 className="h3 text-dark my-s">
               Welcome to <span className="text-primary">Streak</span>
             </h3>
             <p className="text-gray">
@@ -28,6 +27,12 @@ const LandingPage = () => {
         <div>
           <img src={landing} className={`${styles.banner_img}`}></img>
         </div>
+      </div>
+      <div className="text-center">
+        <small className="text-primary">Do you know? </small>
+        <small className={`${styles.info_text} text-gray`}>
+          {funFacts[Math.floor(Math.random() * 3)]}
+        </small>
       </div>
     </>
   );
