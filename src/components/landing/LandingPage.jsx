@@ -1,6 +1,5 @@
 import styles from "./landing.module.css";
 import landing from "../../assets/landing.svg";
-import { Navbar } from "../navigation";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {

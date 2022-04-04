@@ -1,8 +1,6 @@
 import styles from "./timer.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { Navbar } from "../navigation";
 import { Timer } from "./Timer";
-import { BsArrowLeftRight } from "react-icons/bs";
 
 const TimerPage = () => {
   const location = useLocation();

@@ -2,7 +2,6 @@ import { TaskList } from "../home/TaskList";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { Modal } from "../modal/Modal";
 import { useTaskManager } from "../../contexts/task-manager-context";
-import { Navbar } from ".././navigation/";
 import styles from "./home.module.css";
 
 const HomePage = () => {
