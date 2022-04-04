@@ -9,8 +9,7 @@ const TimerPage = () => {
   const { title, time, desc } = location.state?.task;
 
   return (
-    <div>
-      <Navbar />
+    <>
       <main className="grid col-2 my-l">
         <section className={`${styles.timer_container} mx-auto my-m`}>
           <Timer time={time} />
@@ -23,7 +22,7 @@ const TimerPage = () => {
           </Link>
         </section>
       </main>
-    </div>
+    </>
   );
 };
 export { TimerPage };

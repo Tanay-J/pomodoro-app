@@ -6,11 +6,10 @@ import { Link } from "react-router-dom";
 const LandingPage = () => {
   return (
     <>
-      <Navbar />
       <div className={`grid col-2 justify-items-center my-xl py-xl`}>
         <div>
           <div className="my-s">
-            <h3 className="h3 my-s">
+            <h3 className="h3 text-dark my-s">
               Welcome to <span className="text-primary">Streak</span>
             </h3>
             <p className="text-gray">

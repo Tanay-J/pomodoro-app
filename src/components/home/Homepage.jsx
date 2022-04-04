@@ -9,7 +9,6 @@ const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
   return (
     <>
-      <Navbar />
       <div className="m-xl">
         <h3 className="h3 text-dark">Welcome, Tanay</h3>
         {taskManagerState.taskList.length == 0 && (
