@@ -18,9 +18,10 @@ const TimerPage = () => {
         <section className={`${styles.text_container}`}>
           <h4 className="h4 text-dark">{title} </h4>
           <p className="text-gray my-s">{desc}</p>
-          <Link to='/home' className={`${styles.link} text-xs text-gray`}>Done? Go Back to the Task List</Link>
+          <Link to="/home" className={`${styles.link} text-xs text-primary`}>
+            Done? Go Back to the Task List
+          </Link>
         </section>
-        
       </main>
     </div>
   );
