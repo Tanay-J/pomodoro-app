@@ -8,84 +8,145 @@ import {
   MdPlayCircleOutline,
 } from "react-icons/md";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Timer = ({ time }) => {
+const Timer = ({ time, breakTime }) => {
   time *= 60; //time in minutes converted to seconds
+  breakTime *= 60;
 
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isTaskTime, setIsTaskTime] = useState(true);
+  const [isBreakTime, setIsBreakTime] = useState(false);
   const [key, setKey] = useState(1);
 
   const prefixZero = (num) => (num < 10 ? "0" + num : num);
 
-  const renderTime = ({ remainingTime }) => {
+  // Text to render inside Task Timer
+  const renderTaskTime = ({ remainingTime }) => {
     const minutes = prefixZero(Math.floor((remainingTime % 3600) / 60));
     const seconds = prefixZero(remainingTime % 60);
-    {
-      return remainingTime == 0 ? (
-        <p className="text-primary text-s font-bold">Time Up!</p>
-      ) : (
-        <div className="text-center">
-          <p className={`${styles.timer}`}>
-            {minutes}m : {seconds}s
-          </p>
 
-          {isPlaying ? (
-            <p className="text-gray my-s">out of {time / 60} min</p>
-          ) : (
-            <p className="text-primary font-bold my-s">PAUSED</p>
-          )}
-        </div>
-      );
-    }
+    return (
+      <div className="text-center">
+        <p className={`${styles.timer}`}>
+          {minutes}m : {seconds}s
+        </p>
+
+        {isPlaying ? (
+          <p className="text-gray my-s">out of {time / 60} min</p>
+        ) : (
+          <p className="text-primary font-bold my-s">PAUSED</p>
+        )}
+      </div>
+    );
   };
+
+  // Text to render inside Break Timer
+  const renderBreakTime = ({ remainingTime }) => {
+    const minutes = prefixZero(Math.floor((remainingTime % 3600) / 60));
+    const seconds = prefixZero(remainingTime % 60);
+
+    return (
+      <div className="text-center">
+        <h3 className="text-dark">BREAK</h3>
+        <p className={`${styles.timer}`}>
+          {minutes}m : {seconds}s
+        </p>
+      </div>
+    );
+  };
+
+  const taskCompletionHandler = () => {
+    setIsBreakTime(true);
+    setIsTaskTime(false);
+  };
+  const breakCompletionHandler = () => setIsBreakTime(false);
+  const taskRestartHandler = () => setIsTaskTime(true);
 
   return (
     <div>
-      <CountdownCircleTimer
-        isPlaying={isPlaying}
-        size={300}
-        duration={time}
-        colors={["#6EBF8B", "#6EBF8B", "#FF0000", "#FF0000"]}
-        colorsTime={[time, time / 4, time / 6, 0]}
-        key={key}
-      >
-        {({ remainingTime }) => renderTime({ remainingTime })}
-      </CountdownCircleTimer>
+      {/* Timer for task */}
+      {isTaskTime && (
+        <CountdownCircleTimer
+          isPlaying={isPlaying}
+          size={300}
+          duration={time}
+          colors={["#6EBF8B", "#6EBF8B", "#FF0000", "#FF0000"]}
+          colorsTime={[time, time / 4, time / 6, 0]}
+          key={key}
+          onComplete={taskCompletionHandler}
+        >
+          {({ remainingTime }) => renderTaskTime({ remainingTime })}
+        </CountdownCircleTimer>
+      )}
 
-      {/* counter controls */}
-      <div className="flex justify-con-center my-l">
-        {!isPlaying ? (
-          <MdPauseCircleFilled
+      {/* Timer for break */}
+      {isBreakTime && (
+        <CountdownCircleTimer
+          isPlaying={isPlaying}
+          size={300}
+          duration={breakTime}
+          colors={["#6EBF8B", "#6EBF8B", "#FF0000", "#FF0000"]}
+          colorsTime={[breakTime, breakTime / 4, breakTime / 6, 0]}
+          key={key + 1}
+          onComplete={breakCompletionHandler}
+        >
+          {({ remainingTime }) => renderBreakTime({ remainingTime })}
+        </CountdownCircleTimer>
+      )}
+
+      {/* Buttons to show on completion of both task timer and break timer*/}
+      {!isBreakTime && !isTaskTime && (
+        <div className="text-center">
+          <h3
+            className="text-primary pointer my-s"
+            onClick={taskRestartHandler}
+          >
+            Restart Timer
+          </h3>
+
+          <Link to="/home" className={`${styles.link}`}>
+            <h3 className="text-gray pointer">Go to Tasks</h3>
+          </Link>
+        </div>
+      )}
+
+      {/* timer controls */}
+      {isTaskTime && (
+        <div className="flex justify-con-center my-l">
+          {!isPlaying ? (
+            <MdPauseCircleFilled
+              className="text-primary text-xl mx-s"
+              title="Start"
+              onClick={() => setIsPlaying(false)}
+            />
+          ) : (
+            <MdPauseCircleOutline
+              className="text-primary text-xl mx-s"
+              title="Start"
+              onClick={() => setIsPlaying(false)}
+            />
+          )}
+          {isPlaying ? (
+            <MdPlayCircleFilled
+              className="text-primary text-xl mx-s"
+              title="Start"
+              onClick={() => setIsPlaying(true)}
+            />
+          ) : (
+            <MdPlayCircleOutline
+              className="text-primary text-xl mx-s"
+              title="Start"
+              onClick={() => setIsPlaying(true)}
+            />
+          )}
+          <MdOutlineReplay
             className="text-primary text-xl mx-s"
             title="Start"
-            onClick={() => setIsPlaying(false)}
+            onClick={() => setKey(key + 5)}
           />
-        ) : (
-          <MdPauseCircleOutline
-            className="text-primary text-xl mx-s"
-            title="Start"
-            onClick={() => setIsPlaying(false)}
-          />
-        )}
-        {isPlaying ? (
-          <MdPlayCircleFilled
-            className="text-primary text-xl mx-s"
-            title="Start"
-            onClick={() => setIsPlaying(true)}
-          />
-        ) : (
-          <MdPlayCircleOutline
-            className="text-primary text-xl mx-s"
-            title="Start"
-            onClick={() => setIsPlaying(true)}
-          />
-        )}
-        <MdOutlineReplay
-          className="text-primary text-xl mx-s"
-          title="Start"
-          onClick={() => setKey(key + 1)}
-        />
-      </div>
+        </div>
+      )}
     </div>
   );
 };

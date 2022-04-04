@@ -4,13 +4,13 @@ import { Timer } from "./Timer";
 
 const TimerPage = () => {
   const location = useLocation();
-  const { title, time, desc } = location.state?.task;
+  const { title, time, breakTime, desc } = location.state?.task;
 
   return (
     <>
       <main className="grid col-2 my-l">
         <section className={`${styles.timer_container} mx-auto my-m`}>
-          <Timer time={time} />
+          <Timer breakTime={breakTime} time={time} />
         </section>
         <section className={`${styles.text_container}`}>
           <h4 className="h4 text-dark">{title} </h4>
