@@ -1,12 +1,25 @@
 :root {
-  --primary-light: #6EBF8B;
-  --primary-shade: #d4f1de;
-  --accent: #BF6EA2;
+  /* light mode colors */
+  --primary-light: #6ebf8b;
+  --accent: #bf6ea2;
   --background: #f1f0f0;
+  --background-shade: #d4f1de;
   --text-white: white;
   --text-light: white;
   --text-black: black;
   --text-dark: #143109;
   --gray-light: #c5c5c5;
   --gray: gray;
+}
+.dark-mode {
+  --primary-light: #6ebf8b;
+  --accent: #ff6098;
+  --background: #2c2c2c;
+  --background-shade: #686767;
+  --text-white: white;
+  --text-light: #2c2c2c;
+  --text-black: black;
+  --text-dark: white;
+  --gray-light: #c5c5c5;
+  --gray: #c5c5c5;
 }
