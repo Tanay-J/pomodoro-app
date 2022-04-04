@@ -12,7 +12,7 @@ const Modal = () => {
           _id: uuid(),
           title: "",
           desc: "",
-          time: "25",
+          time: 25,
           breakTime: 5,
         }
   );
