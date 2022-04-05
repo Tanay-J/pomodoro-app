@@ -22,7 +22,7 @@ const Navbar = () => {
       } nav-header nav-bg-transparent px-xl py-xs`}
     >
       <Link to="/home" className="link">
-        <h2 class="h2 text-primary">Streak.</h2>
+        <h2 className="h2 text-primary">Streak.</h2>
       </Link>
       <nav>
         <ul className="nav-links">
