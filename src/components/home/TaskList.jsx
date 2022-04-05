@@ -7,7 +7,7 @@ const TaskList = () => {
     <ul className="flex flex-col px-m my-m">
       {taskManagerState.taskList.length !== 0 &&
         taskManagerState.taskList.map((task) => (
-          <li className="text-dark">
+          <li className="text-dark" key={task._id}>
             <Task task={task} />
           </li>
         ))}
