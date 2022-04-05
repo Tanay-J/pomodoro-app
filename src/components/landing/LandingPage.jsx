@@ -13,7 +13,7 @@ const LandingPage = () => {
               Welcome to <span className="text-primary">Streak</span>
             </h3>
             <p className="text-gray">
-              A simple app based on designed to beat procrastination
+              A simple app designed to beat procrastination
             </p>
             <p className="text-gray">and help you accomplish more</p>
           </div>
