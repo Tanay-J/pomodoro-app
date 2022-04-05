@@ -1,7 +1,23 @@
+.main_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .banner_img {
   max-width: 20rem;
   height: auto;
 }
 .btn {
   padding: 0.5rem 2.5rem;
+}
+@media screen and (max-width: 450px) {
+  .main_container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .text_container {
+    text-align: center;
+  }
+  .banner_img {
+    max-width: 10rem;
+  }
 }

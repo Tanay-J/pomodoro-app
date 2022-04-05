@@ -7,9 +7,11 @@ const LandingPage = () => {
   document.title = "Streak Pomodoro";
   return (
     <>
-      <div className={`grid col-2 justify-items-center my-xl py-xl`}>
-        <div>
-          <div className="my-s">
+      <div
+        className={`${styles.main_container} justify-items-center my-xl py-xl px-m`}
+      >
+        <div className={`${styles.text_container}`}>
+          <div>
             <h3 className="h3 text-dark my-s">
               Welcome to <span className="text-primary">Streak</span>
             </h3>

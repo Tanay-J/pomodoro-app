@@ -8,7 +8,7 @@ const TimerPage = () => {
 
   return (
     <>
-      <main className="grid col-2 my-l">
+      <main className={`${styles.timer_wrapper} my-l`}>
         <section className={`${styles.timer_container} mx-auto my-m`}>
           <Timer breakTime={breakTime} time={time} />
         </section>
