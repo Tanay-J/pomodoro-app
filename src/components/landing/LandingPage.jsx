@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { funFacts } from "../../utils/funFacts";
 
 const LandingPage = () => {
+  document.title = "Streak Pomodoro";
   return (
     <>
       <div className={`grid col-2 justify-items-center my-xl py-xl`}>

@@ -26,6 +26,8 @@ const Timer = ({ time, breakTime }) => {
     const minutes = prefixZero(Math.floor((remainingTime % 3600) / 60));
     const seconds = prefixZero(remainingTime % 60);
 
+    document.title = `${minutes}m: ${seconds}s (Task)`;
+
     return (
       <div className="text-center">
         <p className={`${styles.timer}`}>
@@ -45,6 +47,8 @@ const Timer = ({ time, breakTime }) => {
   const renderBreakTime = ({ remainingTime }) => {
     const minutes = prefixZero(Math.floor((remainingTime % 3600) / 60));
     const seconds = prefixZero(remainingTime % 60);
+
+    document.title = `${minutes}m: ${seconds}s (Break)`;
 
     return (
       <div className="text-center">
