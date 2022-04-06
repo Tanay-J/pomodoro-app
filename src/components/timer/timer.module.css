@@ -1,3 +1,7 @@
+.timer_wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .timer_container {
   width: fit-content;
 }
@@ -6,10 +10,16 @@
   font-weight: bolder;
   color: var(--gray);
 }
-.text_container{
-    max-width: 30rem;
-    margin-left: 3rem;
+.text_container {
+  max-width: 30rem;
+  margin-left: 3rem;
 }
-.link{
-    text-decoration: none;
+.link {
+  text-decoration: none;
+}
+
+@media screen and (max-width: 450px) {
+  .timer_wrapper {
+    grid-template-columns: 1fr;
+  }
 }

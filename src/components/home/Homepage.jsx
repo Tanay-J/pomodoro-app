@@ -6,6 +6,7 @@ import styles from "./home.module.css";
 
 const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
+  document.title = "Home | Streak";
   return (
     <>
       <div className="m-xl">

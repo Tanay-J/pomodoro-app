@@ -1,32 +1,27 @@
 import { Link } from "react-router-dom";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { useTaskManager } from "../../contexts/task-manager-context";
+import styles from "./home.module.css";
 
 const Task = ({ task }) => {
   const { taskManagerDispatch } = useTaskManager();
   return (
-    <div className="flex justify-con-space-bet" key={task._id}>
-      <Link
-        to="/timer"
-        state={{ task: task }}
-        className="link text-dark text-s"
-      >
+    <div className={`${styles.task}`} key={task._id}>
+      <Link to="/timer" state={{ task: task }} className="link text-dark ">
         <p onClick={() => taskManagerDispatch({ type: "SHOW_TIMER" })}>
           {task.title}
         </p>
       </Link>
 
-      <div>
+      <div className={`${styles.options_container}`}>
         <BsPencil
-          size={20}
-          className="text-dark mx-s pointer"
+          className={`${styles.option_icon} text-dark pointer`}
           onClick={() =>
             taskManagerDispatch({ type: "EDIT_TASK", payload: task })
           }
         />
         <BsTrash
-          size={20}
-          className="text-dark mx-s pointer"
+          className={`${styles.option_icon} text-dark pointer`}
           onClick={() =>
             taskManagerDispatch({ type: "REMOVE_TASK", payload: task._id })
           }
