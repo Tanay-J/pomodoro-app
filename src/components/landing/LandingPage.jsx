@@ -28,7 +28,11 @@ const LandingPage = () => {
           </Link>
         </div>
         <div>
-          <img src={landing} className={`${styles.banner_img}`}></img>
+          <img
+            src={landing}
+            className={`${styles.banner_img}`}
+            alt="clock illustration"
+          ></img>
         </div>
       </div>
       <div className="text-center">
