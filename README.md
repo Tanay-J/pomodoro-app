@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/33786522/162172807-86cc0a1b-a5f0-4f77-9ec7-813a7670e436.png)
+
 # Streak Pomodoro App
 Streak is a simple app based on Pomodoro technique to help you beat procrastination and accomplish more
 
