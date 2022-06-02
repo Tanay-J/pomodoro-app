@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
-import styles from "./navigation.module.css";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/auth-context";
+import { handleLogout } from "../../firebase/service-requests";
+import styles from "./navigation.module.css";
 
 const Navbar = () => {
   const themeFromLocal = JSON.parse(localStorage.getItem("darkMode"));
-
   const [darkMode, setDarkMode] = useState(themeFromLocal || false);
+
+  const {
+    authState: { isAuthenticated },
+    setAuthState,
+  } = useAuth();
 
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
@@ -25,7 +31,30 @@ const Navbar = () => {
         <h2 className="h2 text-primary">Streak.</h2>
       </Link>
       <nav>
-        <ul className="nav-links">
+        <ul className="nav-links flex align-items-center gap-1">
+          <li>
+            {!isAuthenticated ? (
+              <Link to="/login">
+                <button className="btn btn-outline outline-primary mx-xs">
+                  Login
+                </button>
+              </Link>
+            ) : (
+              <button
+                className="btn btn-outline outline-primary"
+                onClick={() => handleLogout(setAuthState)}
+              >
+                Logout
+              </button>
+            )}
+          </li>
+          <li>
+            {!isAuthenticated && (
+              <Link to="/signup">
+                <button className="btn btn-primary mx-xs">Sign Up</button>
+              </Link>
+            )}
+          </li>
           <li>
             {darkMode ? (
               <BsSunFill
