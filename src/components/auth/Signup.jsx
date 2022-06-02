@@ -17,7 +17,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const {
     authState: { isAuthenticated },
-    setAuthState,
+    authDispatch,
   } = useAuth();
 
   const inputHandler = (event) => {
@@ -37,7 +37,7 @@ const Signup = () => {
         setErrorMsg("Password does not match");
       } else {
         setErrorMsg("");
-        handleSignup(userDetails, setAuthState, navigate, setErrorMsg);
+        handleSignup(userDetails, authDispatch, navigate, setErrorMsg);
       }
     } else setErrorMsg("All fields are mandatory");
   };

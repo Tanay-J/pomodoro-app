@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const {
     authState: { isAuthenticated },
-    setAuthState,
+    authDispatch,
   } = useAuth();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Navbar = () => {
             ) : (
               <button
                 className="btn btn-outline outline-primary"
-                onClick={() => handleLogout(setAuthState)}
+                onClick={() => handleLogout(authDispatch)}
               >
                 Logout
               </button>

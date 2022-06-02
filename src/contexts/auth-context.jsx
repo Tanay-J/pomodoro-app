@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { auth } from "../firebase/config";
 import { handleLogout } from "../firebase/service-requests";
+import { authReducer } from "../utils/reducers/authReducer";
 
 const AuthContext = createContext();
 const useAuth = () => useContext(AuthContext);
@@ -13,22 +14,19 @@ const AuthProvider = ({ children }) => {
     uid: "",
   };
 
-  const [authState, setAuthState] = useState(initialState);
+  const [authState, authDispatch] = useReducer(authReducer, initialState);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setAuthState({
-          isAuthenticated: true,
-          userData: { email: user.email, displayName: user.displayName },
-        });
+        authDispatch({ type: "LOGIN", payload: user });
       } else {
-        handleLogout(setAuthState);
+        handleLogout(authDispatch);
       }
     });
   }, [authState.isAuthenticated]);
   return (
-    <AuthContext.Provider value={{ authState, setAuthState }}>
+    <AuthContext.Provider value={{ authState, authDispatch }}>
       {children}
     </AuthContext.Provider>
   );

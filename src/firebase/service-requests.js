@@ -8,18 +8,11 @@ import {
 } from "firebase/auth";
 import { auth, db } from "./config";
 
-const handleLogin = (loginDetails, setAuthState, setErrorMsg, navigate) => {
+const handleLogin = (loginDetails, authDispatch, setErrorMsg, navigate) => {
   setPersistence(auth, browserLocalPersistence);
-
   signInWithEmailAndPassword(auth, loginDetails.email, loginDetails.password)
     .then((userCredentials) => {
-      const user = userCredentials.user;
-      setAuthState((state) => ({
-        ...state,
-        isAuthenticated: true,
-        userData: { email: user.email, displayName: user.displayName },
-        uid: user.uid,
-      }));
+      authDispatch({ type: "LOGIN", payload: userCredentials.user });
       navigate("/home");
     })
     .catch((error) => {
@@ -36,37 +29,26 @@ const handleLogin = (loginDetails, setAuthState, setErrorMsg, navigate) => {
     });
 };
 
-const handleLogout = (setAuthState) => {
+const handleLogout = (authDispatch) => {
   signOut(auth)
     .then(() => {
-      setAuthState({
-        isAuthenticated: false,
-        userData: { email: "", displayName: "" },
-        uid: "",
-      });
+      authDispatch({ type: "LOGOUT" });
     })
     .catch((error) => {
       console.log("error", error.message);
     });
 };
 
-const handleSignup = (userDetails, setAuthState, navigate, setErrorMsg) => {
+const handleSignup = (userDetails, authDispatch, navigate, setErrorMsg) => {
   setPersistence(auth, browserLocalPersistence);
-
   createUserWithEmailAndPassword(auth, userDetails.email, userDetails.password)
-    .then((userCredentials) => {
-      const user = userCredentials.user;
-      setAuthState((state) => ({
-        ...state,
-        isAuthenticated: true,
-        userData: {
-          email: userDetails.email,
-          displayName: `${userDetails.fName} ${userDetails.lName}`,
-        },
-        uid: user.uid,
-      }));
+    .then(() => {
       updateProfile(auth.currentUser, {
         displayName: `${userDetails.fName} ${userDetails.lName}`,
+      });
+      authDispatch({
+        type: "SIGNUP",
+        payload: [auth.currentUser, userDetails],
       });
       navigate("/home");
     })
