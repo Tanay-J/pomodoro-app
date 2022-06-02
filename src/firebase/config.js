@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA7hIkv_oUzmBeP7lTa-WetHsRWiqG3rrE",
+  apiKey: process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain: "streak-pomodoro.firebaseapp.com",
   projectId: "streak-pomodoro",
   storageBucket: "streak-pomodoro.appspot.com",
-  messagingSenderId: "832447905222",
-  appId: "1:832447905222:web:298008d2538c28e46846c7",
-  measurementId: "G-KJQBCHTP6T",
+  messagingSenderId: process.env.REACT_APP_SENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
 };
 
 export const app = initializeApp(firebaseConfig);
