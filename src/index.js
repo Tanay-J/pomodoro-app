@@ -5,13 +5,16 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { TaskManagerProvider } from "./contexts/task-manager-context";
+import { AuthProvider } from "./contexts/auth-context";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <TaskManagerProvider>
-        <App />
-      </TaskManagerProvider>
+      <AuthProvider>
+        <TaskManagerProvider>
+          <App />
+        </TaskManagerProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

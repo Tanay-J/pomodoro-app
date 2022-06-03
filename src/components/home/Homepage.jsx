@@ -3,14 +3,21 @@ import { BsPlusCircleFill } from "react-icons/bs";
 import { Modal } from "../modal/Modal";
 import { useTaskManager } from "../../contexts/task-manager-context";
 import styles from "./home.module.css";
+import { useAuth } from "../../contexts/auth-context";
 
 const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
+  const {
+    authState: { userData },
+  } = useAuth();
+
   document.title = "Home | Streak";
   return (
     <>
       <div className="m-xl">
-        <h3 className="h3 text-dark">Welcome, Tanay</h3>
+        <h3 className="h3 text-dark">
+          Welcome, {userData.displayName?.split(" ")[0] || 'User'}
+        </h3>
         {taskManagerState.taskList.length == 0 && (
           <p className="text-s text-gray">Let's start!</p>
         )}
