@@ -8,12 +8,11 @@ import {
 } from "firebase/auth";
 import { auth, db } from "./config";
 import {
-  addDoc,
   collection,
   doc,
-  getDoc,
   getDocs,
   query,
+  setDoc,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -82,9 +81,9 @@ const handleSignup = async (
 };
 const addTask = async (taskData, taskManagerDispatch) => {
   try {
+    console.log("add task");
     const user = auth.currentUser;
-    const taskRef = collection(db, "tasks");
-    await addDoc(taskRef, {
+    await setDoc(doc(db, "tasks", taskData._id), {
       _id: taskData._id,
       title: taskData.title,
       desc: taskData.desc,
@@ -111,12 +110,13 @@ const getTasks = async (taskManagerDispatch) => {
   }
 };
 
-const updateTask = async (taskId, updatedTask) => {
+const updateTask = async (updatedTask, taskManagerDispatch) => {
   try {
-    const taskRef = doc(db, "tasks", taskId);
+    const taskRef = doc(db, "tasks", updatedTask._id);
     await updateDoc(taskRef, updatedTask);
+    taskManagerDispatch({ type: "TOGGLE_MODAL" });
   } catch (error) {
-    console.error("Error getting tasks: ", error);
+    console.error("Error updating tasks: ", error);
   }
 };
 

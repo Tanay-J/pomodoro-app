@@ -28,7 +28,7 @@ const HomePage = () => {
     } else {
       taskManagerDispatch({ type: "CLEAR_LIST" });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, taskManagerState.taskToEdit]);
   return (
     <>
       <div className="m-xl">
