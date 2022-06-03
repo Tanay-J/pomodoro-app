@@ -9,6 +9,7 @@ import {
 import { auth, db } from "./config";
 import {
   collection,
+  deleteDoc,
   doc,
   getDocs,
   query,
@@ -81,7 +82,6 @@ const handleSignup = async (
 };
 const addTask = async (taskData, taskManagerDispatch) => {
   try {
-    console.log("add task");
     const user = auth.currentUser;
     await setDoc(doc(db, "tasks", taskData._id), {
       _id: taskData._id,
@@ -92,7 +92,6 @@ const addTask = async (taskData, taskManagerDispatch) => {
       author: user.uid,
     });
     taskManagerDispatch({ type: "ADD_TASK", payload: taskData });
-    taskManagerDispatch({ type: "TOGGLE_MODAL" });
   } catch (error) {
     console.error("Error adding document: ", error);
   }
@@ -114,14 +113,25 @@ const updateTask = async (updatedTask, taskManagerDispatch) => {
   try {
     const taskRef = doc(db, "tasks", updatedTask._id);
     await updateDoc(taskRef, updatedTask);
-    taskManagerDispatch({ type: "TOGGLE_MODAL" });
+    taskManagerDispatch({ type: "ADD_TASK", payload: updatedTask });
   } catch (error) {
     console.error("Error updating tasks: ", error);
   }
 };
 
+const deleteTask = async (taskId, taskManagerDispatch) => {
+  try {
+    const taskRef = doc(db, "tasks", taskId);
+    await deleteDoc(taskRef);
+    taskManagerDispatch({ type: "REMOVE_TASK", payload: taskId });
+  } catch (error) {
+    console.error("Error deleting task: ", error);
+  }
+};
+
 export {
   addTask,
+  deleteTask,
   getTasks,
   handleLogin,
   handleLogout,

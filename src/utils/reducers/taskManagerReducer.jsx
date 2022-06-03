@@ -9,10 +9,20 @@ export function taskManagerReducer(state, action) {
     case "TOGGLE_MODAL":
       return { ...state, showModal: !state.showModal, taskToEdit: {} };
     case "ADD_TASK":
-      return {
-        ...state,
-        taskList: [...state.taskList, action.payload],
-      };
+      return state.taskToEdit._id
+        ? {
+            ...state,
+            taskList: state.taskList.map((task) =>
+              task._id === action.payload._id ? action.payload : task
+            ),
+            showModal: false,
+            taskToEdit: {},
+          }
+        : {
+            ...state,
+            taskList: [...state.taskList, action.payload],
+            showModal: false,
+          };
     case "REMOVE_TASK":
       return {
         ...state,

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { useTaskManager } from "../../contexts/task-manager-context";
 import styles from "./home.module.css";
+import { deleteTask } from "../../firebase/service-requests";
 
 const Task = ({ task }) => {
   const { taskManagerDispatch } = useTaskManager();
@@ -22,9 +23,9 @@ const Task = ({ task }) => {
         />
         <BsTrash
           className={`${styles.option_icon} text-dark pointer`}
-          onClick={() =>
-            taskManagerDispatch({ type: "REMOVE_TASK", payload: task._id })
-          }
+          onClick={() => {
+            deleteTask(task._id, taskManagerDispatch);
+          }}
         />
       </div>
     </div>
