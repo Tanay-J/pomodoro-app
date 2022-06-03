@@ -3,4 +3,5 @@
 
 body {
   background-color: var(--background);
+  transition: 0.2s;
 }

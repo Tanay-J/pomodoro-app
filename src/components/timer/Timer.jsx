@@ -121,32 +121,32 @@ const Timer = ({ time, breakTime }) => {
           {!isPlaying ? (
             <MdPauseCircleFilled
               className="text-primary text-xl mx-s"
-              title="Start"
+              title="Paused"
               onClick={() => setIsPlaying(false)}
             />
           ) : (
             <MdPauseCircleOutline
-              className="text-primary text-xl mx-s"
-              title="Start"
+              className={`${styles.timer_btn} text-primary text-xl mx-s`}
+              title="Pause"
               onClick={() => setIsPlaying(false)}
             />
           )}
           {isPlaying ? (
             <MdPlayCircleFilled
               className="text-primary text-xl mx-s"
-              title="Start"
+              title="Timer Started"
               onClick={() => setIsPlaying(true)}
             />
           ) : (
             <MdPlayCircleOutline
-              className="text-primary text-xl mx-s"
+              className={`${styles.timer_btn} text-primary text-xl mx-s`}
               title="Start"
               onClick={() => setIsPlaying(true)}
             />
           )}
           <MdOutlineReplay
-            className="text-primary text-xl mx-s"
-            title="Start"
+            className={`${styles.timer_btn} text-primary text-xl mx-s`}
+            title="Restart"
             onClick={() => setKey(key + 5)}
           />
         </div>

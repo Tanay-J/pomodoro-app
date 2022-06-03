@@ -55,7 +55,8 @@ const HomePage = () => {
           <h5 className="h5 text-primary">Tasks</h5>
           <BsPlusCircleFill
             size={40}
-            className="pointer text-primary"
+            className={`${styles.add_task_btn} pointer text-primary`}
+            title='Add Task'
             onClick={() => addTaskBtnHandler()}
           />
           {taskManagerState.showModal && <Modal />}

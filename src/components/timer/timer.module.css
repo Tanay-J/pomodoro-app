@@ -10,6 +10,12 @@
   font-weight: bolder;
   color: var(--gray);
 }
+.timer_btn{
+  transition: 0.2s;
+}
+.timer_btn:hover{
+  transform: scale(1.2);
+}
 .text_container {
   max-width: 30rem;
   margin-left: 3rem;
