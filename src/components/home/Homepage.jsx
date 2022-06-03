@@ -1,22 +1,39 @@
-import { TaskList } from "../home/TaskList";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
+import { TaskList } from "../home/TaskList";
 import { Modal } from "../modal/Modal";
 import { useTaskManager } from "../../contexts/task-manager-context";
-import styles from "./home.module.css";
 import { useAuth } from "../../contexts/auth-context";
+import { getTasks } from "../../firebase/service-requests";
+import styles from "./home.module.css";
 
 const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
   const {
-    authState: { userData },
+    authState: { isAuthenticated, userData },
   } = useAuth();
-
+  const navigate = useNavigate();
   document.title = "Home | Streak";
+
+  const addTaskBtnHandler = () => {
+    isAuthenticated
+      ? taskManagerDispatch({ type: "TOGGLE_MODAL" })
+      : navigate("/login");
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getTasks(taskManagerDispatch);
+    } else {
+      taskManagerDispatch({ type: "CLEAR_LIST" });
+    }
+  }, [isAuthenticated]);
   return (
     <>
       <div className="m-xl">
         <h3 className="h3 text-dark">
-          Welcome, {userData.displayName?.split(" ")[0] || 'User'}
+          Welcome, {userData.displayName?.split(" ")[0] || "User"}
         </h3>
         {taskManagerState.taskList.length == 0 && (
           <p className="text-s text-gray">Let's start!</p>
@@ -39,7 +56,7 @@ const HomePage = () => {
           <BsPlusCircleFill
             size={40}
             className="pointer text-primary"
-            onClick={() => taskManagerDispatch({ type: "TOGGLE_MODAL" })}
+            onClick={() => addTaskBtnHandler()}
           />
           {taskManagerState.showModal && <Modal />}
         </div>

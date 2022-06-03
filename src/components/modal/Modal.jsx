@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useTaskManager } from "../../contexts/task-manager-context";
+import { addTask } from "../../firebase/service-requests";
 import styles from "./modal.module.css";
 
 const Modal = () => {
@@ -22,7 +23,7 @@ const Modal = () => {
   const saveTask = (e) => {
     e.preventDefault();
     formData.title && formData.time
-      ? taskManagerDispatch({ type: "ADD_TASK", payload: formData })
+      ? addTask(formData, taskManagerDispatch)
       : setErrorMsg("Task title and duration are required");
   };
   return (

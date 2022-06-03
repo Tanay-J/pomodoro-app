@@ -1,22 +1,18 @@
 export function taskManagerReducer(state, action) {
   switch (action.type) {
+    case "GET_TASKS":
+      let newTaskList = [];
+      action.payload.forEach((doc) => {
+        newTaskList.push(doc.data());
+      });
+      return { ...state, taskList: newTaskList };
     case "TOGGLE_MODAL":
       return { ...state, showModal: !state.showModal, taskToEdit: {} };
     case "ADD_TASK":
-      return state.taskToEdit._id
-        ? {
-            ...state,
-            taskList: state.taskList.map((task) =>
-              task._id === action.payload._id ? action.payload : task
-            ),
-            showModal: false,
-            taskToEdit: {},
-          }
-        : {
-            ...state,
-            taskList: [...state.taskList, action.payload],
-            showModal: false,
-          };
+      return {
+        ...state,
+        taskList: [...state.taskList, action.payload],
+      };
     case "REMOVE_TASK":
       return {
         ...state,
@@ -37,6 +33,8 @@ export function taskManagerReducer(state, action) {
         ...state,
         showTimer: true,
       };
+    case "CLEAR_LIST":
+      return { ...state, taskList: [] };
     default:
       break;
   }

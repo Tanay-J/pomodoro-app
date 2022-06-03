@@ -1,7 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import { auth } from "../firebase/config";
-import { handleLogout } from "../firebase/service-requests";
 import { authReducer } from "../utils/reducers/authReducer";
 
 const AuthContext = createContext();
@@ -21,7 +20,7 @@ const AuthProvider = ({ children }) => {
       if (user) {
         authDispatch({ type: "LOGIN", payload: user });
       } else {
-        handleLogout(authDispatch);
+        authDispatch({ type: "LOGOUT" });
       }
     });
   }, [authState.isAuthenticated]);
