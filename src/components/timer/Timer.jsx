@@ -1,4 +1,3 @@
-import styles from "./timer.module.css";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import {
   MdOutlineReplay,
@@ -9,6 +8,8 @@ import {
 } from "react-icons/md";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import styles from "./timer.module.css";
 
 const Timer = ({ time, breakTime }) => {
   time *= 60; //time in minutes converted to seconds
@@ -61,10 +62,18 @@ const Timer = ({ time, breakTime }) => {
   };
 
   const taskCompletionHandler = () => {
+    toast("Time Up, Good Job!", {
+      icon: "👏",
+    });
     setIsBreakTime(true);
     setIsTaskTime(false);
   };
-  const breakCompletionHandler = () => setIsBreakTime(false);
+  const breakCompletionHandler = () => {
+    toast("Break Over!", {
+      icon: "⏰",
+    });
+    setIsBreakTime(false);
+  };
   const taskRestartHandler = () => setIsTaskTime(true);
 
   return (
