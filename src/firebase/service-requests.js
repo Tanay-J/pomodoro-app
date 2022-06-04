@@ -18,8 +18,14 @@ import {
   where,
 } from "firebase/firestore";
 
-const handleLogin = async (loginDetails, setErrorMsg, navigate) => {
+const handleLogin = async (
+  loginDetails,
+  setErrorMsg,
+  setIsLoading,
+  navigate
+) => {
   try {
+    setIsLoading(true);
     setPersistence(auth, browserLocalPersistence);
     await signInWithEmailAndPassword(
       auth,
@@ -38,6 +44,8 @@ const handleLogin = async (loginDetails, setErrorMsg, navigate) => {
       default:
         setErrorMsg(error.message);
     }
+  } finally {
+    setIsLoading(false);
   }
 };
 
@@ -53,9 +61,11 @@ const handleSignup = async (
   userDetails,
   authDispatch,
   navigate,
-  setErrorMsg
+  setErrorMsg,
+  setIsLoading
 ) => {
   try {
+    setIsLoading(true);
     setPersistence(auth, browserLocalPersistence);
     const res = await createUserWithEmailAndPassword(
       auth,
@@ -78,10 +88,13 @@ const handleSignup = async (
       default:
         setErrorMsg(error.message);
     }
+  } finally {
+    setIsLoading(false);
   }
 };
-const addTask = async (taskData, taskManagerDispatch) => {
+const addTask = async (taskData, taskManagerDispatch, setIsLoading) => {
   try {
+    setIsLoading(true);
     const user = auth.currentUser;
     await setDoc(doc(db, "tasks", taskData._id), {
       _id: taskData._id,
@@ -94,11 +107,14 @@ const addTask = async (taskData, taskManagerDispatch) => {
     taskManagerDispatch({ type: "ADD_TASK", payload: taskData });
   } catch (error) {
     console.error("Error adding document: ", error);
+  } finally {
+    setIsLoading(false);
   }
 };
 
-const getTasks = async (taskManagerDispatch) => {
+const getTasks = async (taskManagerDispatch, setIsLoading) => {
   try {
+    setIsLoading(true);
     const user = auth.currentUser;
     const tasksRef = collection(db, "tasks");
     const q = query(tasksRef, where("author", "==", user.uid));
@@ -106,26 +122,34 @@ const getTasks = async (taskManagerDispatch) => {
     taskManagerDispatch({ type: "GET_TASKS", payload: querySnapshot });
   } catch (error) {
     console.error("Error getting tasks: ", error);
+  } finally {
+    setIsLoading(false);
   }
 };
 
-const updateTask = async (updatedTask, taskManagerDispatch) => {
+const updateTask = async (updatedTask, taskManagerDispatch, setIsLoading) => {
   try {
+    setIsLoading(true);
     const taskRef = doc(db, "tasks", updatedTask._id);
     await updateDoc(taskRef, updatedTask);
     taskManagerDispatch({ type: "ADD_TASK", payload: updatedTask });
   } catch (error) {
     console.error("Error updating tasks: ", error);
+  } finally {
+    setIsLoading(false);
   }
 };
 
-const deleteTask = async (taskId, taskManagerDispatch) => {
+const deleteTask = async (taskId, taskManagerDispatch, setIsLoading) => {
   try {
+    setIsLoading(true);
     const taskRef = doc(db, "tasks", taskId);
     await deleteDoc(taskRef);
     taskManagerDispatch({ type: "REMOVE_TASK", payload: taskId });
   } catch (error) {
     console.error("Error deleting task: ", error);
+  } finally {
+    setIsLoading(false);
   }
 };
 

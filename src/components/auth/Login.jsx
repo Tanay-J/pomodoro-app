@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { handleLogin } from "../../firebase/service-requests";
+import { Loader } from "../loaders";
 import styles from "./auth.module.css";
 
 const Login = () => {
   const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     authState: { isAuthenticated },
@@ -31,7 +33,7 @@ const Login = () => {
   const dataValidation = (event) => {
     event.preventDefault();
     if (loginDetails.email && loginDetails.password) {
-      handleLogin(loginDetails, setErrorMsg, navigate);
+      handleLogin(loginDetails, setErrorMsg, setIsLoading, navigate);
       setLoginDetails({ email: "", password: "" });
     } else setErrorMsg("Both fields are required");
   };
@@ -72,6 +74,7 @@ const Login = () => {
               onChange={inputHandler}
             />
             {errorMsg && <p className="text-danger text-center">{errorMsg}</p>}
+            <Loader isLoading={isLoading} />
             <button className="btn btn-primary my-s" onClick={dataValidation}>
               Login
             </button>
