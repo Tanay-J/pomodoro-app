@@ -2,21 +2,36 @@
   min-height: 20rem;
   background-color: var(--background-shade);
 }
-
+.add_task_btn{
+  transition: 0.2s;
+}
+.add_task_btn:hover{
+  transform: scale(1.2);
+}
 .task {
   display: flex;
   justify-content: space-between;
   font-size: 1.5rem;
 }
+.task_title {
+  transition: 0.2s;
+}
+.task_title:hover {
+  color: var(--primary-light);
+  transition: 0.2s;
+}
 .options_container {
   display: flex;
   align-items: center;
 }
-
 .option_icon {
   margin: 0 12px;
+  transition: 0.2s;
 }
-
+.option_icon:hover {
+  color: var(--primary-light);
+  transform: scale(1.2);
+}
 @media screen and (max-width: 450px) {
   .task {
     font-size: 1rem;

@@ -10,7 +10,6 @@ const Login = () => {
 
   const {
     authState: { isAuthenticated },
-    authDispatch,
   } = useAuth();
 
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const Login = () => {
   const dataValidation = (event) => {
     event.preventDefault();
     if (loginDetails.email && loginDetails.password) {
-      handleLogin(loginDetails, authDispatch, setErrorMsg, navigate);
+      handleLogin(loginDetails, setErrorMsg, navigate);
       setLoginDetails({ email: "", password: "" });
     } else setErrorMsg("Both fields are required");
   };

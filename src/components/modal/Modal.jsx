@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useTaskManager } from "../../contexts/task-manager-context";
+import { addTask, updateTask } from "../../firebase/service-requests";
 import styles from "./modal.module.css";
 
 const Modal = () => {
@@ -21,9 +22,15 @@ const Modal = () => {
 
   const saveTask = (e) => {
     e.preventDefault();
-    formData.title && formData.time
-      ? taskManagerDispatch({ type: "ADD_TASK", payload: formData })
-      : setErrorMsg("Task title and duration are required");
+    if (formData.title && formData.time) {
+      if (!taskManagerState.taskToEdit._id) {
+        addTask(formData, taskManagerDispatch);
+      } else {
+        updateTask(formData, taskManagerDispatch);
+      }
+    } else {
+      setErrorMsg("Task title and duration are required");
+    }
   };
   return (
     <div className={`${styles.modal_wrapper}`}>
@@ -140,7 +147,7 @@ const Modal = () => {
         </div>
         {errorMsg && <small className="text-danger">{errorMsg}</small>}
         <button className="btn btn-primary my-xs" onClick={saveTask}>
-          ADD TASK
+          {taskManagerState.taskToEdit._id ? "EDIT TASK" : "ADD TASK"}
         </button>
         <button
           className="btn btn-outline outline-primary"
