@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuid } from "uuid";
 import { useTaskManager } from "../../contexts/task-manager-context";
 import { addTask, updateTask } from "../../firebase/service-requests";
+import { Loader } from "../loaders";
 import styles from "./modal.module.css";
 
 const Modal = () => {
@@ -17,16 +18,16 @@ const Modal = () => {
           breakTime: 5,
         }
   );
-
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
   const saveTask = (e) => {
     e.preventDefault();
     if (formData.title && formData.time) {
       if (!taskManagerState.taskToEdit._id) {
-        addTask(formData, taskManagerDispatch);
+        addTask(formData, taskManagerDispatch, setIsLoading);
       } else {
-        updateTask(formData, taskManagerDispatch);
+        updateTask(formData, taskManagerDispatch, setIsLoading);
       }
     } else {
       setErrorMsg("Task title and duration are required");
@@ -146,6 +147,7 @@ const Modal = () => {
           </label>
         </div>
         {errorMsg && <small className="text-danger">{errorMsg}</small>}
+        <Loader isLoading={isLoading} />
         <button className="btn btn-primary my-xs" onClick={saveTask}>
           {taskManagerState.taskToEdit._id ? "EDIT TASK" : "ADD TASK"}
         </button>

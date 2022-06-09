@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsPlusCircleFill } from "react-icons/bs";
 import { TaskList } from "../home/TaskList";
@@ -7,6 +7,7 @@ import { useTaskManager } from "../../contexts/task-manager-context";
 import { useAuth } from "../../contexts/auth-context";
 import { getTasks } from "../../firebase/service-requests";
 import styles from "./home.module.css";
+import { Loader } from "../loaders";
 
 const HomePage = () => {
   const { taskManagerState, taskManagerDispatch } = useTaskManager();
@@ -14,6 +15,7 @@ const HomePage = () => {
     authState: { isAuthenticated, userData },
   } = useAuth();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   document.title = "Home | Streak";
 
   const addTaskBtnHandler = () => {
@@ -24,7 +26,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      getTasks(taskManagerDispatch);
+      getTasks(taskManagerDispatch, setIsLoading);
     } else {
       taskManagerDispatch({ type: "CLEAR_LIST" });
     }
@@ -56,13 +58,16 @@ const HomePage = () => {
           <BsPlusCircleFill
             size={40}
             className={`${styles.add_task_btn} pointer text-primary`}
-            title='Add Task'
+            title="Add Task"
             onClick={() => addTaskBtnHandler()}
           />
           {taskManagerState.showModal && <Modal />}
         </div>
 
-        <TaskList />
+        {!isLoading && <TaskList />}
+        <div className="text-center">
+          <Loader isLoading={isLoading} />
+        </div>
       </div>
     </>
   );

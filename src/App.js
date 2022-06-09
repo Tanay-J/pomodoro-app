@@ -1,5 +1,5 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import { HomePage, LandingPage, TimerPage } from "./components";
 import { Navbar } from "./components/navigation";
 import { Login, Signup } from "./components/auth";
@@ -8,6 +8,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<HomePage />}></Route>

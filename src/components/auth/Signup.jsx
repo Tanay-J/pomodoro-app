@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { handleSignup } from "../../firebase/service-requests";
+import { Loader } from "../loaders";
 import styles from "./auth.module.css";
 
 const Signup = () => {
@@ -14,6 +15,7 @@ const Signup = () => {
   });
 
   const [errorMsg, setErrorMsg] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const {
     authState: { isAuthenticated },
@@ -37,7 +39,13 @@ const Signup = () => {
         setErrorMsg("Password does not match");
       } else {
         setErrorMsg("");
-        handleSignup(userDetails, authDispatch, navigate, setErrorMsg);
+        handleSignup(
+          userDetails,
+          authDispatch,
+          navigate,
+          setErrorMsg,
+          setIsLoading
+        );
       }
     } else setErrorMsg("All fields are mandatory");
   };
@@ -122,6 +130,7 @@ const Signup = () => {
             />
 
             {errorMsg && <p className="text-center text-danger">{errorMsg}</p>}
+            <Loader isLoading={isLoading} />
 
             <button className="btn btn-primary my-s" onClick={dataValidation}>
               Signup
