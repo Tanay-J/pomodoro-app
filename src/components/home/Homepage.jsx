@@ -16,7 +16,6 @@ const HomePage = () => {
   } = useAuth();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  document.title = "Home | Streak";
 
   const addTaskBtnHandler = () => {
     isAuthenticated
@@ -25,6 +24,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
+    document.title = "Home | Streak";
     if (isAuthenticated) {
       getTasks(taskManagerDispatch, setIsLoading);
     } else {

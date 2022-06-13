@@ -1,10 +1,13 @@
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styles from "./landing.module.css";
 import landing from "../../assets/landing.svg";
-import { Link } from "react-router-dom";
 import { funFacts } from "../../utils/funFacts";
 
 const LandingPage = () => {
-  document.title = "Streak Pomodoro";
+  useEffect(() => {
+    document.title = "Streak Pomodoro";
+  });
   return (
     <>
       <div

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { handleSignup } from "../../firebase/service-requests";
@@ -49,6 +49,10 @@ const Signup = () => {
       }
     } else setErrorMsg("All fields are mandatory");
   };
+
+  useEffect(() => {
+    document.title = "Signup";
+  });
 
   return (
     <main>

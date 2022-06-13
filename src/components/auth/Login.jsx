@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { handleLogin } from "../../firebase/service-requests";
@@ -38,6 +38,9 @@ const Login = () => {
     } else setErrorMsg("Both fields are required");
   };
 
+  useEffect(() => {
+    document.title = "Login";
+  });
   return (
     <main>
       {!isAuthenticated ? (
