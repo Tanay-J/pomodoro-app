@@ -8,7 +8,6 @@ const TaskManagerProvider = ({ children }) => {
   const initialState = {
     taskList: [],
     showModal: false,
-    showTimer: false,
     taskToEdit: {},
   };
 

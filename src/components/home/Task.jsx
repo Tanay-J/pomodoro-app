@@ -17,21 +17,24 @@ const Task = ({ task }) => {
         className="link text-dark"
         title="Start Timer"
       >
-        <p
-          className={`${styles.task_title}`}
-          onClick={() => taskManagerDispatch({ type: "SHOW_TIMER" })}
-        >
+        <p className={`${styles.task_title}`}>
           {!isLoading && task.title}
           <Loader isLoading={isLoading} />
         </p>
       </Link>
 
       <div className={`${styles.options_container}`}>
-        <BsClock
-          className={`${styles.option_icon} text-dark pointer`}
+        <Link
+          to="/timer"
+          state={{ task: task }}
+          className="link text-dark"
           title="Start Timer"
-          onClick={() => taskManagerDispatch({ type: "SHOW_TIMER" })}
-        />
+        >
+          <BsClock
+            className={`${styles.option_icon} text-dark pointer`}
+            title="Start Timer"
+          />
+        </Link>
         <BsPencil
           className={`${styles.option_icon} text-dark pointer`}
           title="Edit Task"

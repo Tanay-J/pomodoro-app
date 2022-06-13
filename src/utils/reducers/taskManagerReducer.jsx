@@ -38,11 +38,6 @@ export function taskManagerReducer(state, action) {
           {}
         ),
       };
-    case "SHOW_TIMER":
-      return {
-        ...state,
-        showTimer: true,
-      };
     case "CLEAR_LIST":
       return { ...state, taskList: [] };
     default:
