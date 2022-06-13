@@ -33,6 +33,7 @@ const Modal = () => {
       setErrorMsg("Task title and duration are required");
     }
   };
+  console.log("modal");
   return (
     <div className={`${styles.modal_wrapper}`}>
       <form
@@ -71,77 +72,81 @@ const Modal = () => {
           }
         />
         <div>
-          <label
-            onClick={(e) =>
-              setFormData((prevData) => ({ ...prevData, time: e.target.value }))
-            }
-          >
+          <label>
             <input
               type="radio"
               name="time"
               value="25"
               checked={formData.time == 25}
+              onChange={(e) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  time: e.target.value,
+                }))
+              }
             ></input>
             <small>25 min</small>
           </label>
-          <label
-            onClick={(e) =>
-              setFormData((prevData) => ({ ...prevData, time: e.target.value }))
-            }
-          >
+          <label>
             <input
               type="radio"
               name="time"
               value="40"
               checked={formData.time == 40}
+              onChange={(e) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  time: e.target.value,
+                }))
+              }
             ></input>
             <small>40 min</small>
           </label>
-          <label
-            onClick={(e) =>
-              setFormData((prevData) => ({ ...prevData, time: e.target.value }))
-            }
-          >
+          <label>
             <input
               type="radio"
               name="time"
               value="60"
               checked={formData.time == 60}
+              onChange={(e) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  time: e.target.value,
+                }))
+              }
             ></input>
             <small>60 min</small>
           </label>
         </div>
         <div className="text-center">
           <p className="text-primary">Break</p>
-          <label
-            onClick={(e) =>
-              setFormData((prevData) => ({
-                ...prevData,
-                breakTime: e.target.value,
-              }))
-            }
-          >
+          <label>
             <input
               type="radio"
               name="breakTime"
               value="5"
               checked={formData.breakTime == 5}
+              onChange={(e) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  breakTime: e.target.value,
+                }))
+              }
             ></input>
             <small>Short</small>
           </label>
-          <label
-            onClick={(e) =>
-              setFormData((prevData) => ({
-                ...prevData,
-                breakTime: e.target.value,
-              }))
-            }
-          >
+          <label>
             <input
               type="radio"
               name="breakTime"
               value="15"
               checked={formData.breakTime == 15}
+              onChange={(e) =>
+                setFormData((prevData) => ({
+                  ...prevData,
+                  breakTime: e.target.value,
+                }))
+              }
             ></input>
             <small>Long</small>
           </label>
