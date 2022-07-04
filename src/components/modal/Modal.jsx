@@ -24,7 +24,11 @@ const Modal = () => {
   const saveTask = (e) => {
     e.preventDefault();
     if (formData.title && formData.time) {
-      if (!taskManagerState.taskToEdit._id) {
+      if (formData.time <= 0 || formData.time > 60) {
+        setErrorMsg(
+          "Time duration can't be less than zero or more than 1 hour"
+        );
+      } else if (!taskManagerState.taskToEdit._id) {
         addTask(formData, taskManagerDispatch, setIsLoading);
       } else {
         updateTask(formData, taskManagerDispatch, setIsLoading);
@@ -33,7 +37,6 @@ const Modal = () => {
       setErrorMsg("Task title and duration are required");
     }
   };
-  console.log("modal");
   return (
     <div className={`${styles.modal_wrapper}`}>
       <form
@@ -151,7 +154,9 @@ const Modal = () => {
             <small>Long</small>
           </label>
         </div>
-        {errorMsg && <small className="text-danger">{errorMsg}</small>}
+        {errorMsg && (
+          <small className="text-danger text-center">{errorMsg}</small>
+        )}
         <Loader isLoading={isLoading} />
         <button className="btn btn-primary my-xs" onClick={saveTask}>
           {taskManagerState.taskToEdit._id ? "EDIT TASK" : "ADD TASK"}
