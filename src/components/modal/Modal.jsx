@@ -40,7 +40,7 @@ const Modal = () => {
   return (
     <div className={`${styles.modal_wrapper}`}>
       <form
-        className={`${styles.modal_container} flex flex-col gap-1 p-m br-s my-l`}
+        className={`${styles.modal_container} text-center flex flex-col gap-1 p-m br-s my-l`}
       >
         <input
           className={`${styles.input} px-xs br-s`}
@@ -155,7 +155,7 @@ const Modal = () => {
           </label>
         </div>
         {errorMsg && (
-          <small className="text-danger text-center">{errorMsg}</small>
+          <small className="text-danger">{errorMsg}</small>
         )}
         <Loader isLoading={isLoading} />
         <button className="btn btn-primary my-xs" onClick={saveTask}>
